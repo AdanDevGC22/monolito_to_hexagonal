@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/monolito
+    username: root
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto:update
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: monolito
+
+appDescription: "Monolito API"
+appVersion: "1.8.6"

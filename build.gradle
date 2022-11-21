@@ -1,0 +1,47 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '2.7.5'
+	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	//para pruebas unitarias
+	id 'jacoco'
+	// para swagger
+	id 'org.springdoc.openapi-gradle-plugin' version '1.3.4'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//mapear entre dos claes diferentes de manera automatica, a travez de anotaciones en una interface
+	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+	//es para documentar los controladores con swagger
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.12'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'com.mysql:mysql-connector-j'
+	annotationProcessor 'org.projectlombok:lombok'
+	//procesador de anotaciones para mapstruct
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+test{
+	finalizedBy jacocoTestReport
+}
